@@ -17,6 +17,10 @@ class CommentResponse(BaseModel):
     sentiment: Literal["positive", "negative", "neutral"]
     rating: int = Field(..., ge=1, le=5)
 
+@app.get("/")
+def root():
+    return {"status": "ok"}
+
 @app.post("/comment", response_model=CommentResponse)
 async def analyze_comment(request: CommentRequest):
     try:
